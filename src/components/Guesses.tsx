@@ -61,7 +61,8 @@ export function Guesses({ poolId, code }: Props) {
         bgColor: 'green.500',
       })
 
-      fetchGames(); 
+      fetchGames();
+      console.log(firstTeamPoints)
     } catch (error) {
       console.log(error)
 

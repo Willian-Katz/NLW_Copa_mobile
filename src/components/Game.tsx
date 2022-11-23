@@ -35,6 +35,16 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
 
   const when = dayjs(data.date).locale(ptBR).format("DD [de] MMMM [de] YYYY [às] HH:00[h]");
 
+  function GuessDone() {
+    const condition = !data.guess
+
+    if (condition === false) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   return (
     <VStack
       w="full"
@@ -59,6 +69,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
           code={data.firstTeamCountryCode}
           position="right"
           onChangeText={setFirstTeamPoints}
+          factorCondition={GuessDone()}
         />
 
         <X color={colors.gray[300]} size={sizes[6]} />
@@ -67,6 +78,7 @@ export function Game({ data, setFirstTeamPoints, setSecondTeamPoints, onGuessCon
           code={data.secondTeamCountryCode}
           position="left"
           onChangeText={setSecondTeamPoints}
+          factorCondition={GuessDone()}
         />
       </HStack>
 

@@ -1,6 +1,6 @@
 import { useToast, VStack, HStack } from 'native-base';
 import { Share } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 
 import { api } from '../services/api';
@@ -23,6 +23,7 @@ export function Details() {
     const [poolDatails, setPoolDatails] = useState<PoolCardProps>({} as PoolCardProps)
 
     const toast = useToast();
+    const { navigate } = useNavigation();
 
     // Vou pegar o id dos parametros das rotas
     const route = useRoute();
@@ -55,6 +56,27 @@ export function Details() {
        }); 
     }
 
+    async function hendleDeletePool() {
+        try {
+            setIsLoading(true)
+
+            await api.delete(`/pools/${id}`)
+
+            return navigate('pools')
+            
+        } catch (error) {
+            console.log(error)
+
+            toast.show({
+                title: 'Não foi possível apagar o bolão',
+                placement: 'top',
+                bgColor: 'red.500',
+            })
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     useEffect(() => {
         fetchPoolDatails();
     }, [id]);
@@ -75,7 +97,7 @@ export function Details() {
             {
                 poolDatails._count?.participants > 0 ?
                 <VStack px={5} flex={1}>
-                    <PoolHeader data={poolDatails} />
+                    <PoolHeader data={poolDatails} hendleDeletePool={hendleDeletePool} />
 
                     <HStack bgColor="gray.800" p={1} rounded="sm" mb={5} >
                         <Option 

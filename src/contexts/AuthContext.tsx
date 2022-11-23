@@ -53,7 +53,7 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
 
     async function signInWithGoogle(_token: string) {
         // Irá me gerar o TOKEN de autenticação do google
-        // console.log("TOKEN DE AUTENTICAÇÃO ===> ", _token);
+        console.log("TOKEN DE AUTENTICAÇÃO ===> ", _token);
 
         try {
             setIsUserLoading(true);

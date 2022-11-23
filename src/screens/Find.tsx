@@ -68,7 +68,9 @@ export function Find() {
 
     return (
         <VStack flex={1} bgColor="gray.900">
-            <Header title="Buscar por código" showBackButton/>
+            <Header title="Buscar por código" showBackButton onShare={function (): void {
+                throw new Error("Function not implemented.");
+            } }/>
 
             <VStack mx={5} alignItems="center">
                 <Heading fontFamily="heading" color="white" fontSize="xl" my={8} textAlign="center">

@@ -10,6 +10,7 @@ export interface PoolCardProps {
   ownerId: string;
   createdAt: string;
   owner: {
+    id: string;
     name: string;
   },
   participants: ParticipantProps[];
@@ -46,7 +47,7 @@ export function PoolCard({ data, ...rest }: Props) {
             Criado por {data.owner.name}
           </Text>
         </VStack>
-
+        
         <Participants
           count={data._count.participants}
           participants={data.participants}

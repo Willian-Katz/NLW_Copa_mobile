@@ -3,11 +3,18 @@ import { Heading, HStack, Text, VStack } from 'native-base';
 import { PoolCardProps } from './PoolCard';
 import { Participants } from './Participants';
 
+import { X } from 'phosphor-react-native';
+import { TouchableOpacity } from 'react-native';
+
 interface Props {
   data: PoolCardProps;
+  hendleDeletePool?: () => void;
 }
 
-export function PoolHeader({ data }: Props) {
+export function PoolHeader({ data, hendleDeletePool }: Props) {
+  const idUser = String(data.id);
+  const idOwner = String(data.ownerId);
+
   return (
     <HStack
       w="full"
@@ -36,10 +43,16 @@ export function PoolHeader({ data }: Props) {
         </HStack>
       </VStack>
 
-      <Participants
-        count={data._count?.participants}
-        participants={data.participants}
-      />
+      <HStack  alignItems="center">
+        <Participants
+          count={data._count?.participants}
+          participants={data.participants}
+        />
+        <HStack w={4}></HStack>
+        <TouchableOpacity onPress={hendleDeletePool}>
+          <X size={24} color="#e61919" weight="bold" />
+        </TouchableOpacity>
+      </HStack>
     </HStack>
   );
 }
